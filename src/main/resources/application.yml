@@ -1,0 +1,18 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:29092
+    streams:
+      application-id: notification-streams
+      state-dir: /tmp/kafka-streams
+    consumer:
+      group-id: notification-group
+      auto-offset-reset: latest
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+server:
+  port: 9091
+
+logging:
+  level:
+    org.springframework.kafka.listener: DEBUG
