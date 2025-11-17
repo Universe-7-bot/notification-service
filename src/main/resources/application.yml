@@ -3,12 +3,31 @@ spring:
     bootstrap-servers: localhost:29092
     streams:
       application-id: notification-streams
+      bootstrap-servers: localhost:29092
       state-dir: /tmp/kafka-streams
-    consumer:
-      group-id: notification-group
-      auto-offset-reset: latest
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        commit.interval.ms: 1000
+
+      # Consumer Configuration
+      consumer:
+        group-id: notification-group
+        auto-offset-reset: latest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+      # Producer Configuration
+      producer:
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+# Custom topic names
+kafka:
+  topics:
+    user-events: user-events
+    user-location: user-location
+    user-enriched: user-enriched
 
 server:
   port: 9091
@@ -16,3 +35,7 @@ server:
 logging:
   level:
     org.springframework.kafka.listener: DEBUG
+    org.apache.kafka.streams: INFO  # Add this to see Streams logs
+    com.example.kafka.stream: DEBUG  # Add this to see your join logs
+
+

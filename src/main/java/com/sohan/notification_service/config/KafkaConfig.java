@@ -1,7 +1,15 @@
 package com.sohan.notification_service.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.TopicPartition;
+import org.apache.kafka.common.protocol.types.Field;
+import org.apache.kafka.common.serialization.Serdes;
+import org.apache.kafka.streams.StreamsBuilder;
+import org.apache.kafka.streams.kstream.Consumed;
+import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.KTable;
+import org.apache.kafka.streams.kstream.Produced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -14,6 +22,8 @@ import org.springframework.util.backoff.FixedBackOff;
 @Configuration
 @EnableKafka
 public class KafkaConfig {
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
 //    @Bean
 //    public NewTopic userEventsTopic() {

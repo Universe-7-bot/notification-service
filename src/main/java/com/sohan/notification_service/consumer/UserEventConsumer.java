@@ -26,15 +26,15 @@ public class UserEventConsumer {
 //        }
 //    }
 
-    @KafkaListener(topics = "user-events", groupId = "notification-group")
-    public void consume(ConsumerRecord<String, String> record) {
-        log.info("Consumer message: {}", record.value());
-
-        //simulate failure
-        if (record.value().contains("error")) {
-            throw new RuntimeException("Failed to process event: " + record.value());
-        }
-
-        log.info("Successfully processed: {}", record.value());
-    }
+//    @KafkaListener(topics = "user-events", groupId = "notification-group")
+//    public void consume(ConsumerRecord<String, String> record) {
+//        log.info("Consumer message: {}", record.value());
+//
+//        //simulate failure
+//        if (record.value().contains("error")) {
+//            throw new RuntimeException("Failed to process event: " + record.value());
+//        }
+//
+//        log.info("Successfully processed: {}", record.value());
+//    }
 }
